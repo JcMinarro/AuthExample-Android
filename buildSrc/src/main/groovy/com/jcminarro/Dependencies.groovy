@@ -9,6 +9,7 @@ class Dependencies {
     private static String ANDROID_TEST_RUNNER_VERSION = '1.0.1'
     private static String ESPRESSO_VERSION = '3.0.1'
     private static String DAGGER_VERSION = '2.8'
+    private static String BUTTERKNIFE_VERSION = '8.5.1'
 
     static String kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
     static String androidBuildToolGradlePlugin = "com.android.tools.build:gradle:$ANDROID_BUILD_TOOL_VERSION"
@@ -19,4 +20,6 @@ class Dependencies {
     static String espresso = "com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION"
     static String dagger = "com.google.dagger:dagger:$DAGGER_VERSION"
     static String daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    static String butterKnife = "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    static String butterKnifeCompiler = "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
 }
