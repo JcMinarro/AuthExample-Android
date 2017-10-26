@@ -28,6 +28,12 @@ android {
             applicationIdSuffix '.debug'
         }
     }
+    
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        }
+    }
 }
 
 dependencies {
