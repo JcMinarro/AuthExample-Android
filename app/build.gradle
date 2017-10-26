@@ -37,6 +37,10 @@ dependencies {
     implementation Dependencies.dagger
     implementation Dependencies.kotlinSTDLib
     implementation Dependencies.appCompat
+    implementation Dependencies.retrofit
+    implementation Dependencies.retrofitGsonConverter
+    implementation Dependencies.okHttpLogger
+    implementation Dependencies.ok2curl
     testImplementation Dependencies.jUnit
     androidTestImplementation Dependencies.AndroidTestRunner
     androidTestImplementation Dependencies.espresso
