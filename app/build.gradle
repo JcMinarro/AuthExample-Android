@@ -42,6 +42,11 @@ dependencies {
     implementation Dependencies.okHttpLogger
     implementation Dependencies.ok2curl
     testImplementation Dependencies.jUnit
+    testImplementation Dependencies.mockito
+    testImplementation Dependencies.mockitoKotlin
+    testImplementation Dependencies.kotlinTestJunit
+    testImplementation Dependencies.kluent
+    testImplementation Dependencies.wiremock
     androidTestImplementation Dependencies.AndroidTestRunner
     androidTestImplementation Dependencies.espresso
 }
