@@ -23,6 +23,8 @@ android {
 }
 
 dependencies {
+    kapt Dependencies.daggerCompiler
+    implementation Dependencies.dagger
     implementation Dependencies.kotlinSTDLib
     implementation Dependencies.appCompat
     testImplementation Dependencies.jUnit
