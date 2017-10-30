@@ -2,7 +2,6 @@ package com.jcminarro.authexample.internal.network.login
 
 import com.jcminarro.authexample.internal.network.ApiClient
 import com.jcminarro.authexample.internal.network.OAuth
-
 import javax.inject.Inject
 
 class LoginApiClient @Inject
