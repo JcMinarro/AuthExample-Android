@@ -28,7 +28,7 @@ class QuoteRepositoryTest {
     @Test(expected = APIIOException::class)
     fun `Should throw an exception asking for a random quote`() {
         When calling quoteApiClient.getRandomQuote() doThrow APIIOException(mock())
-        
+
         quoteRepository.getRandomQuote()
 
         Verify on quoteApiClient that quoteApiClient.getRandomQuote() was called

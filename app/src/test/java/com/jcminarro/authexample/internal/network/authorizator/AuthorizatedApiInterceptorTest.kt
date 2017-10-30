@@ -1,6 +1,6 @@
 package com.jcminarro.authexample.internal.network.authorizator
 
-import com.jcminarro.authexample.internal.network.TokensProvider
+import com.jcminarro.authexample.internal.network.AccessTokenProvider
 import com.nhaarman.mockito_kotlin.check
 import com.nhaarman.mockito_kotlin.doReturn
 import okhttp3.Interceptor
@@ -16,15 +16,15 @@ class AuthorizatedApiInterceptorTest {
     private val response: Response = mock()
     private val request: Request = Request.Builder().url("http://jc.com").build()
     private val chain: Interceptor.Chain = mock()
-    private val tokensProvider: TokensProvider = mock()
+    private val accessTokenProvider: AccessTokenProvider = mock()
     private val accessToken = "accessToken"
-    private val authorizatedApiInterceptor = AuthorizatedApiInterceptor(tokensProvider)
+    private val authorizatedApiInterceptor = AuthorizatedApiInterceptor(accessTokenProvider)
 
     @Before
     fun setUp() {
         When calling chain.request() doReturn request
         When calling chain.proceed(any()) doReturn response
-        When calling tokensProvider.accessToken doReturn accessToken
+        When calling accessTokenProvider.accessToken doReturn accessToken
     }
 
     @Test

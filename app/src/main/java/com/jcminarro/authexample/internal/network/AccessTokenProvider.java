@@ -1,8 +1,6 @@
 package com.jcminarro.authexample.internal.network;
 
-public interface TokensProvider {
+public interface AccessTokenProvider {
 
     String getAccessToken();
-
-    String getRefreshToken();
 }

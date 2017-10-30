@@ -2,7 +2,7 @@ package com.jcminarro.authexample.internal.network.authorizator;
 
 import android.support.annotation.NonNull;
 
-import com.jcminarro.authexample.internal.network.TokensProvider;
+import com.jcminarro.authexample.internal.network.AccessTokenProvider;
 
 import java.io.IOException;
 
@@ -16,11 +16,11 @@ public class AuthorizatedApiInterceptor implements Interceptor {
 
     private static final String HEADER_AUTH_KEY = "X-access-token";
 
-    private final TokensProvider tokensProvider;
+    private final AccessTokenProvider accessTokenProvider;
 
     @Inject
-    public AuthorizatedApiInterceptor(TokensProvider tokensProvider) {
-        this.tokensProvider = tokensProvider;
+    public AuthorizatedApiInterceptor(AccessTokenProvider accessTokenProvider) {
+        this.accessTokenProvider = accessTokenProvider;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class AuthorizatedApiInterceptor implements Interceptor {
     private Request addAuthHeaderToken(Request request) {
         return request
                 .newBuilder()
-                .addHeader(HEADER_AUTH_KEY, tokensProvider.getAccessToken())
+                .addHeader(HEADER_AUTH_KEY, accessTokenProvider.getAccessToken())
                 .build();
     }
 }
