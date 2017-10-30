@@ -7,6 +7,6 @@ import javax.inject.Inject
 class QuoteApiClient @Inject
 constructor(endpoint: QuoteEndpoint) : ApiClient<QuoteEndpoint>(endpoint) {
 
-    fun getRandomQuote(username: String, password: String): Quote =
+    fun getRandomQuote(): Quote =
             map(evaluateCall(endpoint.randomQuote.execute()))
 }
