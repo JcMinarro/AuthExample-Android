@@ -8,6 +8,8 @@ import com.jcminarro.authexample.internal.network.authorizator.AuthorizatedApiIn
 import com.jcminarro.authexample.internal.network.authorizator.UnauthorizatedApiInterceptor
 import com.jcminarro.authexample.internal.network.login.LoginEndpoint
 import com.jcminarro.authexample.internal.network.quote.QuoteEndpoint
+import com.jcminarro.authexample.internal.network.reauthorizate.ReauthorizatedApiInterceptor
+import com.jcminarro.authexample.internal.network.reauthorizate.Reauthorizer
 import com.jcminarro.authexample.internal.network.refresh.RefreshEndpoint
 
 object EndpointMother {
@@ -23,6 +25,11 @@ fun createTokensProviders(accessToken: String = TOKENS_PROVIDER_MOTHER_accessTok
             override fun getAccessToken(): String = accessToken
             override fun getRefreshToken(): String = refreshToken
         }
+
+fun createReauthorizer() = Reauthorizer {}
+
+fun createReauthorizedApiInterceptor(reauthorizer: Reauthorizer = createReauthorizer()) =
+        ReauthorizatedApiInterceptor(reauthorizer)
 
 fun createAuthorizatedApiInterceptor(tokensProvider: TokensProvider = createTokensProviders()) =
         AuthorizatedApiInterceptor(tokensProvider)
@@ -44,8 +51,10 @@ fun createRefeshEndpoint(apiHost: String,
                 .create(RefreshEndpoint::class.java)
 
 fun createQuoteEndpoint(apiHost: String,
-                        authorizatedApiInterceptor: AuthorizatedApiInterceptor = createAuthorizatedApiInterceptor()) =
+                        authorizatedApiInterceptor: AuthorizatedApiInterceptor = createAuthorizatedApiInterceptor(),
+                        reauthorizatedApiInterceptor: ReauthorizatedApiInterceptor = createReauthorizedApiInterceptor()) =
         EndpointFactory.Builder(apiHost)
                 .withAuthorizatedApiInterceptor(authorizatedApiInterceptor)
+                .withReauthorizatedApiInterceptor(reauthorizatedApiInterceptor)
                 .build()
                 .create(QuoteEndpoint::class.java)

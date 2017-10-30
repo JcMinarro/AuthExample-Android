@@ -7,6 +7,8 @@ import com.jcminarro.authexample.internal.network.authorizator.AuthorizatedApi;
 import com.jcminarro.authexample.internal.network.authorizator.AuthorizatedApiInterceptor;
 import com.jcminarro.authexample.internal.network.authorizator.UnauthorizatedApiInterceptor;
 import com.jcminarro.authexample.internal.network.authorizator.UnauthorizatedApi;
+import com.jcminarro.authexample.internal.network.reauthorizate.ReauthorizatedApi;
+import com.jcminarro.authexample.internal.network.reauthorizate.ReauthorizatedApiInterceptor;
 import com.moczul.ok2curl.CurlInterceptor;
 import com.moczul.ok2curl.logger.Loggable;
 
@@ -26,15 +28,18 @@ public class EndpointFactory {
     private static final ConnectionPool CONNECTION_POOL = new ConnectionPool();
 
     private final String apiHost;
-    private AuthorizatedApiInterceptor authorizatedApiInterceptor;
-    private UnauthorizatedApiInterceptor unauthorizatedApiInterceptor;
+    private final AuthorizatedApiInterceptor authorizatedApiInterceptor;
+    private final UnauthorizatedApiInterceptor unauthorizatedApiInterceptor;
+    private final ReauthorizatedApiInterceptor reauthorizatedApiInterceptor;
 
     private EndpointFactory(String apiHost,
             AuthorizatedApiInterceptor authorizatedApiInterceptor,
-            UnauthorizatedApiInterceptor unauthorizatedApiInterceptor) {
+            UnauthorizatedApiInterceptor unauthorizatedApiInterceptor,
+            ReauthorizatedApiInterceptor reauthorizatedApiInterceptor) {
         this.apiHost = apiHost;
         this.authorizatedApiInterceptor = authorizatedApiInterceptor;
         this.unauthorizatedApiInterceptor = unauthorizatedApiInterceptor;
+        this.reauthorizatedApiInterceptor = reauthorizatedApiInterceptor;
     }
 
     public <T> T create(Class<T> api) {
@@ -59,13 +64,14 @@ public class EndpointFactory {
         addLoggingInterceptor(builder);
         addAuthorizatorInterceptorIfNeeded(api, builder);
         addUnauthorizatorInterceptorIfNeeded(api, builder);
+        addReauthorizatorInterceptorIfNeeded(api, builder);
         return builder.build();
     }
 
     private void addLoggingInterceptor(OkHttpClient.Builder builder) {
         builder.addInterceptor(
                 new HttpLoggingInterceptor(
-                        new HttpLoggingInterceptor.Logger(){
+                        new HttpLoggingInterceptor.Logger() {
                             @Override
                             public void log(String message) {
                                 UtilsKt.log(message);
@@ -101,10 +107,22 @@ public class EndpointFactory {
         }
     }
 
+    private void addReauthorizatorInterceptorIfNeeded(Class api, OkHttpClient.Builder builder) {
+        if (api.isAnnotationPresent(ReauthorizatedApi.class)) {
+            if (reauthorizatedApiInterceptor == null) {
+                throw new IllegalStateException("To build a " + api.getName() + " that is annotated with " +
+                        ReauthorizatedApi.class.getName() + " you need to add a " +
+                        ReauthorizatedApiInterceptor.class.getName() + " to the " + EndpointFactory.class.getName());
+            }
+            builder.addInterceptor(reauthorizatedApiInterceptor);
+        }
+    }
+
     public static class Builder {
         private String apiHost;
         private AuthorizatedApiInterceptor authorizatedApiInterceptor;
         private UnauthorizatedApiInterceptor unauthorizatedApiInterceptor;
+        private ReauthorizatedApiInterceptor reauthorizatedApiInterceptor;
 
         public Builder(String apiHost) {
             this.apiHost = apiHost;
@@ -120,8 +138,17 @@ public class EndpointFactory {
             return this;
         }
 
+        public Builder withReauthorizatedApiInterceptor(ReauthorizatedApiInterceptor reauthorizatedApiInterceptor) {
+            this.reauthorizatedApiInterceptor = reauthorizatedApiInterceptor;
+            return this;
+        }
+
         public EndpointFactory build() {
-            return new EndpointFactory(apiHost, authorizatedApiInterceptor, unauthorizatedApiInterceptor);
+            return new EndpointFactory(
+                    apiHost,
+                    authorizatedApiInterceptor,
+                    unauthorizatedApiInterceptor,
+                    reauthorizatedApiInterceptor);
         }
     }
 }
