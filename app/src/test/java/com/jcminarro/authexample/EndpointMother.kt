@@ -2,6 +2,7 @@ package com.jcminarro.authexample
 
 import com.jcminarro.authexample.internal.network.EndpointFactory
 import com.jcminarro.authexample.internal.network.login.LoginEndpoint
+import com.jcminarro.authexample.internal.network.quote.QuoteEndpoint
 import com.jcminarro.authexample.internal.network.refresh.RefreshEndpoint
 
 object EndpointMother{
@@ -18,3 +19,8 @@ fun createRefeshEndpoint(apiHost: String) =
         EndpointFactory.Builder(apiHost)
                 .build()
                 .create(RefreshEndpoint::class.java)
+
+fun createQuoteEndpoint(apiHost: String) =
+        EndpointFactory.Builder(apiHost)
+                .build()
+                .create(QuoteEndpoint::class.java)
