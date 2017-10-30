@@ -9,10 +9,10 @@ import javax.inject.Inject;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
-public class UnaouthorizatedApiInterceptor implements Interceptor {
+public class UnauthorizatedApiInterceptor implements Interceptor {
 
     @Inject
-    public UnaouthorizatedApiInterceptor() { }
+    public UnauthorizatedApiInterceptor() { }
 
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
