@@ -8,15 +8,12 @@ import com.jcminarro.authexample.internal.network.OAuth;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.inject.Inject;
-
 public class SharedPreferenceSesssionDatasource implements SessionDatasource, AccessTokenProvider {
 
     private static final String ACCESS_TOKEN_KEY = "accessToken";
     private static final String REFRESH_TOKEN_KEY = "refreshToken";
     private final SharedPreferences sharedPreferences;
 
-    @Inject
     public SharedPreferenceSesssionDatasource(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
     }

@@ -6,12 +6,15 @@ import com.jcminarro.authexample.internal.network.OAuth;
 import com.jcminarro.authexample.internal.network.login.LoginApiClient;
 import com.jcminarro.authexample.internal.network.refresh.RefreshApiClient;
 
+import javax.inject.Inject;
+
 public class SessionRepository {
 
     private final LoginApiClient loginApiClient;
     private final RefreshApiClient refreshApiClient;
     private final SessionDatasource sessionDatasource;
 
+    @Inject
     public SessionRepository(
             LoginApiClient loginApiClient,
             RefreshApiClient refreshApiClient,
