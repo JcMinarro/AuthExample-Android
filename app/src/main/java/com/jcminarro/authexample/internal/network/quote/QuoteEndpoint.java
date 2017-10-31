@@ -5,11 +5,13 @@ import com.jcminarro.authexample.internal.network.reauthorizate.ReauthorizatedAp
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 
 @AuthorizatedApi
 @ReauthorizatedApi
 public interface QuoteEndpoint {
 
+    @Headers("Content-Type: application/json")
     @GET("/quote")
     Call<QuoteResponse> getRandomQuote();
 }
