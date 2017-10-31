@@ -71,7 +71,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
 
     private void onLoggedIn() {
         getView().close();
-        navigator.navigateToMain();
+        navigator.navigateToQuote();
     }
 
     interface View extends BasePresenter.View {

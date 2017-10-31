@@ -41,7 +41,7 @@ public class StartUpPresenter extends BasePresenter<StartUpPresenter.View> {
     }
 
     private void navigateToMain() {
-        navigator.navigateToMain();
+        navigator.navigateToQuote();
     }
 
     interface View extends BasePresenter.View {

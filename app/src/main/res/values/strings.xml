@@ -6,4 +6,6 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_credential">This credential are invalid</string>
+    <string name="get_random_quote">Get Random Quote</string>
+    <string name="generic_error">Something was wrong</string>
 </resources>
