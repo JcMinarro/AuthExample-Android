@@ -1,6 +1,7 @@
 package com.jcminarro.authexample.startup;
 
 import com.jcminarro.authexample.internal.interactor.InteractorExecutor;
+import com.jcminarro.authexample.internal.navigator.Navigator;
 import com.jcminarro.authexample.internal.presenter.BasePresenter;
 
 import javax.inject.Inject;
@@ -8,10 +9,12 @@ import javax.inject.Inject;
 public class StartUpPresenter extends BasePresenter<StartUpPresenter.View> {
 
     private final RefreshSessionInteractor refreshSessionInteractor;
+    private final Navigator navigator;
 
     @Inject
-    public StartUpPresenter(RefreshSessionInteractor refreshSessionInteractor) {
+    public StartUpPresenter(RefreshSessionInteractor refreshSessionInteractor, Navigator navigator) {
         this.refreshSessionInteractor = refreshSessionInteractor;
+        this.navigator = navigator;
     }
 
     @Override
@@ -34,11 +37,11 @@ public class StartUpPresenter extends BasePresenter<StartUpPresenter.View> {
     }
 
     private void navigateToLogin() {
-
+        navigator.navigateToLogin();
     }
 
     private void navigateToMain() {
-
+        navigator.navigateToMain();
     }
 
     interface View extends BasePresenter.View {
