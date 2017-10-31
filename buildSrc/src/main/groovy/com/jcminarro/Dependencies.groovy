@@ -17,6 +17,7 @@ class Dependencies {
     private static String KLUENT_VERSION = '1.28'
     private static String MOKITO_KOTLIN_VERSION = '1.5.0'
     private static String WIREMOCK_VERSION = '2.8.0'
+    private static String ANDROID_SUPPORT_VERSION = '26.1.0'
 
     static String kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
     static String androidBuildToolGradlePlugin = "com.android.tools.build:gradle:$ANDROID_BUILD_TOOL_VERSION"
@@ -38,4 +39,5 @@ class Dependencies {
     static String kluent = "org.amshove.kluent:kluent:$KLUENT_VERSION"
     static String mockitoKotlin = "com.nhaarman:mockito-kotlin:$MOKITO_KOTLIN_VERSION"
     static String wiremock = "com.github.tomakehurst:wiremock:$WIREMOCK_VERSION"
+    static String supportDesign = "com.android.support:design:$ANDROID_SUPPORT_VERSION"
 }

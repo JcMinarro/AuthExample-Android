@@ -40,6 +40,7 @@ android {
 dependencies {
     kapt Dependencies.daggerCompiler
     kapt Dependencies.butterKnifeCompiler
+    implementation Dependencies.supportDesign
     implementation Dependencies.butterKnife
     implementation Dependencies.dagger
     implementation Dependencies.kotlinSTDLib
