@@ -62,9 +62,9 @@ public class EndpointFactory {
                 .connectTimeout(CONNECT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         addLoggingInterceptor(builder);
+        addReauthorizatorInterceptorIfNeeded(api, builder);
         addAuthorizatorInterceptorIfNeeded(api, builder);
         addUnauthorizatorInterceptorIfNeeded(api, builder);
-        addReauthorizatorInterceptorIfNeeded(api, builder);
         return builder.build();
     }
 
