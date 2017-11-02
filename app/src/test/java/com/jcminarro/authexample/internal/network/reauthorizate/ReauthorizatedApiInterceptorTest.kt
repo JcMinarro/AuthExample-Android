@@ -2,10 +2,19 @@ package com.jcminarro.authexample.internal.network.reauthorizate
 
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.inOrder
+import com.nhaarman.mockito_kotlin.mock
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import org.amshove.kluent.*
+import org.amshove.kluent.Verify
+import org.amshove.kluent.When
+import org.amshove.kluent.`Verify no further interactions`
+import org.amshove.kluent.`Verify no interactions`
+import org.amshove.kluent.called
+import org.amshove.kluent.calling
+import org.amshove.kluent.on
+import org.amshove.kluent.that
+import org.amshove.kluent.was
 import org.junit.Before
 import org.junit.Test
 
@@ -33,7 +42,7 @@ class ReauthorizatedApiInterceptorTest {
 
         reauthorizatedApiInterceptor.intercept(chain)
 
-        inOrder(chain){
+        inOrder(chain) {
             verify(chain).request()
             verify(chain).proceed(validRequest)
         }

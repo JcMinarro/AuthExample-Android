@@ -7,8 +7,17 @@ import com.jcminarro.authexample.internal.repository.QuoteRepository
 import com.nhaarman.mockito_kotlin.check
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.doThrow
+import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.spy
-import org.amshove.kluent.*
+import org.amshove.kluent.Verify
+import org.amshove.kluent.When
+import org.amshove.kluent.`Verify no further interactions`
+import org.amshove.kluent.`should equal to`
+import org.amshove.kluent.called
+import org.amshove.kluent.calling
+import org.amshove.kluent.on
+import org.amshove.kluent.that
+import org.amshove.kluent.was
 import org.junit.Test
 
 class GetQuoteInteractorTest {

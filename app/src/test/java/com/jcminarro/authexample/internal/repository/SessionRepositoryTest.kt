@@ -7,7 +7,18 @@ import com.jcminarro.authexample.internal.network.login.LoginApiClient
 import com.jcminarro.authexample.internal.network.refresh.RefreshApiClient
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.doThrow
-import org.amshove.kluent.*
+import com.nhaarman.mockito_kotlin.mock
+import org.amshove.kluent.Verify
+import org.amshove.kluent.When
+import org.amshove.kluent.`Verify no further interactions`
+import org.amshove.kluent.`Verify no interactions`
+import org.amshove.kluent.`should be false`
+import org.amshove.kluent.`should be true`
+import org.amshove.kluent.called
+import org.amshove.kluent.calling
+import org.amshove.kluent.on
+import org.amshove.kluent.that
+import org.amshove.kluent.was
 import org.junit.Before
 import org.junit.Test
 

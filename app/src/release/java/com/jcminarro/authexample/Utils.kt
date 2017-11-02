@@ -1,7 +1,5 @@
 package com.jcminarro.authexample
 
-import android.util.Log
-
 val DEBUG_TAG = "debugTag"
 
 @JvmOverloads

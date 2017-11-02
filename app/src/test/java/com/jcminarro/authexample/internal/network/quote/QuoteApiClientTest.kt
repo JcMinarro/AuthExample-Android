@@ -1,9 +1,16 @@
 package com.jcminarro.authexample.internal.network.quote
 
-import com.github.tomakehurst.wiremock.client.WireMock.*
+import com.github.tomakehurst.wiremock.client.WireMock.aResponse
+import com.github.tomakehurst.wiremock.client.WireMock.get
+import com.github.tomakehurst.wiremock.client.WireMock.stubFor
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import com.github.tomakehurst.wiremock.junit.WireMockRule
-import com.jcminarro.authexample.*
+import com.jcminarro.authexample.EndpointMother
+import com.jcminarro.authexample.EndpointPath
+import com.jcminarro.authexample.ResponseMother
+import com.jcminarro.authexample.createQuoteEndpoint
+import com.jcminarro.authexample.createQuoteResponse
+import com.jcminarro.authexample.createQuoteResponseJson
 import com.jcminarro.authexample.internal.network.APIIOException
 import org.amshove.kluent.`should equal to`
 import org.junit.Before

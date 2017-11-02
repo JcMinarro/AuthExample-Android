@@ -26,8 +26,10 @@ allprojects {
 
 subprojects {
     apply from: new File(rootDir, "gradle/checkstyle.gradle")
+    apply from: new File(rootDir, "gradle/ktlint.gradle")
     afterEvaluate {
         tasks.findByName('check').dependsOn('checkstyle')
+        tasks.findByName('check').dependsOn('ktlint')
     }
 }
 

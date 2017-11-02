@@ -1,16 +1,24 @@
 package com.jcminarro.authexample.internal.network.refresh
 
-import com.github.tomakehurst.wiremock.client.WireMock.*
+import com.github.tomakehurst.wiremock.client.WireMock.aResponse
+import com.github.tomakehurst.wiremock.client.WireMock.equalToJson
+import com.github.tomakehurst.wiremock.client.WireMock.post
+import com.github.tomakehurst.wiremock.client.WireMock.stubFor
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import com.github.tomakehurst.wiremock.junit.WireMockRule
-import com.jcminarro.authexample.*
+import com.jcminarro.authexample.EndpointMother
+import com.jcminarro.authexample.EndpointPath
+import com.jcminarro.authexample.ResponseMother
+import com.jcminarro.authexample.createRefeshEndpoint
+import com.jcminarro.authexample.createRefreshResponse
+import com.jcminarro.authexample.createRefreshResponseJson
 import com.jcminarro.authexample.internal.network.APIIOException
 import org.amshove.kluent.`should equal to`
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class RefreshApiClientTest{
+class RefreshApiClientTest {
 
     val VALID_REFRESH_TOKEN = "valid_refresh_token"
     val INVALID_REFRESH_TOKEN = "invalid_refresh_token"

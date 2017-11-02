@@ -6,5 +6,5 @@ val DEBUG_TAG = "debugTag"
 
 @JvmOverloads
 fun log(tag: String = DEBUG_TAG, text: String) {
-    Log.d(DEBUG_TAG, text)
+    Log.d(tag, text)
 }

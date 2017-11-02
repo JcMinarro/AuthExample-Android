@@ -1,12 +1,21 @@
 package com.jcminarro.authexample.internal.network.authorizator
 
 import com.jcminarro.authexample.internal.network.AccessTokenProvider
+import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.check
 import com.nhaarman.mockito_kotlin.doReturn
+import com.nhaarman.mockito_kotlin.mock
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import org.amshove.kluent.*
+import org.amshove.kluent.Verify
+import org.amshove.kluent.When
+import org.amshove.kluent.`should equal to`
+import org.amshove.kluent.called
+import org.amshove.kluent.calling
+import org.amshove.kluent.on
+import org.amshove.kluent.that
+import org.amshove.kluent.was
 import org.junit.Before
 import org.junit.Test
 
