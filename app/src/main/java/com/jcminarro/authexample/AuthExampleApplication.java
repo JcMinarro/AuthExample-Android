@@ -6,7 +6,7 @@ import com.jcminarro.authexample.internal.di.component.AppComponent;
 import com.jcminarro.authexample.internal.di.component.DaggerAppComponent;
 import com.jcminarro.authexample.internal.di.module.AppModule;
 
-public class AuthExampleApplication extends Application{
+public class AuthExampleApplication extends Application {
 
     private AppComponent component;
 

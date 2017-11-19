@@ -9,12 +9,6 @@
     <module name="com.puppycrawl.tools.checkstyle.TreeWalker">
 
         <!-- Style checks -->
-        <module name="RegexpSinglelineJava">
-            <property name="format" value="^\s* +\s*\t"/>
-            <property name="message"
-                      value="Line has leading tabs characters; indentation should be performed with spaces only."/>
-            <property name="ignoreComments" value="true"/>
-        </module>
         <module name="NeedBraces"/>
         <module name="MissingOverride"/>
         <module name="LeftCurly"/>
