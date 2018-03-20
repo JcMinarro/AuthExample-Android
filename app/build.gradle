@@ -55,6 +55,7 @@ dependencies {
     testImplementation Dependencies.kotlinTestJunit
     testImplementation Dependencies.kluent
     testImplementation Dependencies.wiremock
+    testImplementation Dependencies.mockwebserver
     androidTestImplementation Dependencies.AndroidTestRunner
     androidTestImplementation Dependencies.espresso
 }
