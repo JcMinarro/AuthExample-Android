@@ -10,5 +10,5 @@ constructor(endpoint: QuoteEndpoint) : ApiClient<QuoteEndpoint>(endpoint) {
 
     @Throws(APIIOException::class)
     fun getRandomQuote(): Quote =
-            map(evaluateCall(endpoint.randomQuote.execute()))
+            map(evaluateCall(endpoint.randomQuote))
 }

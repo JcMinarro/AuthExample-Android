@@ -10,5 +10,5 @@ constructor(endpoint: RefreshEndpoint) : ApiClient<RefreshEndpoint>(endpoint) {
 
     @Throws(APIIOException::class)
     fun refresh(refreshToken: String): OAuth =
-            map(evaluateCall(endpoint.refreshTokens(RefreshBody(refreshToken)).execute()))
+            map(evaluateCall(endpoint.refreshTokens(RefreshBody(refreshToken))))
 }

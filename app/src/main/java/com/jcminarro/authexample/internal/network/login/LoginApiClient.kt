@@ -10,5 +10,5 @@ constructor(endpoint: LoginEndpoint) : ApiClient<LoginEndpoint>(endpoint) {
 
     @Throws(APIIOException::class)
     fun login(username: String, password: String): OAuth =
-            map(evaluateCall(endpoint.login(LoginBody(username, password)).execute()))
+            map(evaluateCall(endpoint.login(LoginBody(username, password))))
 }

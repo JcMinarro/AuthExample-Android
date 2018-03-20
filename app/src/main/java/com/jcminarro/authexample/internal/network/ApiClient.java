@@ -1,5 +1,8 @@
 package com.jcminarro.authexample.internal.network;
 
+import java.io.IOException;
+
+import retrofit2.Call;
 import retrofit2.Response;
 
 public class ApiClient<T> {
@@ -10,7 +13,8 @@ public class ApiClient<T> {
         this.endpoint = endpoint;
     }
 
-    protected <U> U evaluateCall(Response<U> response) throws APIIOException {
+    protected <U> U evaluateCall(Call<U> call) throws IOException {
+        Response<U> response = call.execute();
         if (!response.isSuccessful()) {
             throw new APIIOException(response.raw());
         }
