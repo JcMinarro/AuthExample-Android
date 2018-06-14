@@ -1,5 +1,7 @@
 package com.jcminarro.authexample.internal.network.login
 
+import arrow.core.Failure
+import arrow.core.Success
 import com.github.tomakehurst.wiremock.client.WireMock.aResponse
 import com.github.tomakehurst.wiremock.client.WireMock.equalToJson
 import com.github.tomakehurst.wiremock.client.WireMock.post
@@ -13,7 +15,10 @@ import com.jcminarro.authexample.createLoginEndpoint
 import com.jcminarro.authexample.createLoginResponse
 import com.jcminarro.authexample.createLoginResponseJson
 import com.jcminarro.authexample.internal.network.APIIOException
+import com.jcminarro.authexample.internal.network.OAuth
+import org.amshove.kluent.`should be instance of`
 import org.amshove.kluent.`should equal to`
+import org.amshove.kluent.`should equal`
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -34,6 +39,7 @@ class LoginApiClientTest {
 
     @Before
     fun setUp() {
+        val invalidLoginResponse = aResponse().withStatus(401)
         loginApiClient = LoginApiClient(
                 createLoginEndpoint(EndpointMother.DEFAULT_API_HOST + wiremockRule.port()))
         stubFor(post(EndpointPath.LOGIN)
@@ -43,10 +49,10 @@ class LoginApiClientTest {
                                 createLoginResponse()))))
         stubFor(post(EndpointPath.LOGIN)
                 .withRequestBody(equalToJson(createRequestBodyJson(VALID_USERNAME, INVALID_PASSWORD)))
-                .willReturn(aResponse().withStatus(401)))
+                .willReturn(invalidLoginResponse))
         stubFor(post(EndpointPath.LOGIN)
                 .withRequestBody(equalToJson(createRequestBodyJson(INVALID_USERNAME, VALID_PASSWORD)))
-                .willReturn(aResponse().withStatus(401)))
+                .willReturn(invalidLoginResponse))
     }
 
     @Test
@@ -65,6 +71,29 @@ class LoginApiClientTest {
     @Test(expected = APIIOException::class)
     fun `Should throw an exception when try to login with an invalid username`() {
         loginApiClient.login(INVALID_USERNAME, VALID_PASSWORD)
+    }
+
+    @Test
+    fun `Should return a Success of OAuth when login with valid credential`() {
+        val oAuth = loginApiClient.loginFP(VALID_USERNAME, VALID_PASSWORD)
+
+        oAuth `should equal` Success(OAuth(ResponseMother.LOGIN_MOTHERR_accessToken, ResponseMother.LOGIN_MOTHERR_refreshToken))
+    }
+
+    @Test()
+    fun `Should return Failure of OAuth when try to login with an invalid password`() {
+        val oAuth = loginApiClient.loginFP(VALID_USERNAME, INVALID_PASSWORD)
+
+        oAuth `should be instance of` Failure::class
+        (oAuth as Failure<OAuth>).exception `should be instance of` APIIOException::class
+    }
+
+    @Test()
+    fun `Should return Failure of OAuth when try to login with an invalid username`() {
+        val oAuth = loginApiClient.loginFP(INVALID_USERNAME, VALID_PASSWORD)
+
+        oAuth `should be instance of` Failure::class
+        (oAuth as Failure<OAuth>).exception `should be instance of` APIIOException::class
     }
 
     fun createRequestBodyJson(username: String, password: String) =

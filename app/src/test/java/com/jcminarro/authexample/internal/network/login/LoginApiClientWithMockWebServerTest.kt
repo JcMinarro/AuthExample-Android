@@ -1,17 +1,22 @@
 package com.jcminarro.authexample.internal.network.login
 
+import arrow.core.Failure
+import arrow.core.Success
 import com.jcminarro.authexample.EndpointPath
 import com.jcminarro.authexample.ResponseMother
 import com.jcminarro.authexample.createLoginEndpoint
 import com.jcminarro.authexample.createLoginResponse
 import com.jcminarro.authexample.createLoginResponseJson
 import com.jcminarro.authexample.internal.network.APIIOException
+import com.jcminarro.authexample.internal.network.OAuth
 import com.jcminarro.authexample.removeAllSpaces
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
+import org.amshove.kluent.`should be instance of`
 import org.amshove.kluent.`should equal to`
+import org.amshove.kluent.`should equal`
 import org.junit.Before
 import org.junit.Test
 
@@ -74,6 +79,29 @@ class LoginApiClientWithMockWebServerTest {
     @Test(expected = APIIOException::class)
     fun `Should throw an exception when try to login with an invalid username`() {
         loginApiClient.login(INVALID_USERNAME, VALID_PASSWORD)
+    }
+
+    @Test
+    fun `Should return a Success of OAuth when login with valid credential`() {
+        val oAuth = loginApiClient.loginFP(VALID_USERNAME, VALID_PASSWORD)
+
+        oAuth `should equal` Success(OAuth(ResponseMother.LOGIN_MOTHERR_accessToken, ResponseMother.LOGIN_MOTHERR_refreshToken))
+    }
+
+    @Test()
+    fun `Should return Failure of OAuth when try to login with an invalid password`() {
+        val oAuth = loginApiClient.loginFP(VALID_USERNAME, INVALID_PASSWORD)
+
+        oAuth `should be instance of` Failure::class
+        (oAuth as Failure<OAuth>).exception `should be instance of` APIIOException::class
+    }
+
+    @Test()
+    fun `Should return Failure of OAuth when try to login with an invalid username`() {
+        val oAuth = loginApiClient.loginFP(INVALID_USERNAME, VALID_PASSWORD)
+
+        oAuth `should be instance of` Failure::class
+        (oAuth as Failure<OAuth>).exception `should be instance of` APIIOException::class
     }
 
     fun createRequestBodyJson(username: String, password: String) =
