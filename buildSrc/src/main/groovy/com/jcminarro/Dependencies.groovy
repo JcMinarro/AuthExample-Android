@@ -3,6 +3,7 @@ package com.jcminarro;
 class Dependencies {
 
     private static String KOTLIN_VERSION = '1.1.51'
+    private static String KOTLINX_VERSION = '0.22.5'
     private static String ANDROID_BUILD_TOOL_VERSION = '3.0.0'
     private static String APP_COMPAT_VERSION = '26.1.0'
     private static String JUNIT_VERSION = '4.12'
@@ -19,6 +20,7 @@ class Dependencies {
     private static String WIREMOCK_VERSION = '2.8.0'
     private static String MOCKWEBSERVER_VERSION = OK_HTTP_VERSION
     private static String ANDROID_SUPPORT_VERSION = '26.1.0'
+    private static String ARROW_VERSION = '0.7.2'
 
     static String kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
     static String androidBuildToolGradlePlugin = "com.android.tools.build:gradle:$ANDROID_BUILD_TOOL_VERSION"
@@ -42,4 +44,10 @@ class Dependencies {
     static String wiremock = "com.github.tomakehurst:wiremock:$WIREMOCK_VERSION"
     static String mockwebserver = "com.squareup.okhttp3:mockwebserver:$MOCKWEBSERVER_VERSION"
     static String supportDesign = "com.android.support:design:$ANDROID_SUPPORT_VERSION"
+    static String arrowCore = "io.arrow-kt:arrow-core:$ARROW_VERSION"
+    static String arrowTypeclasses = "io.arrow-kt:arrow-typeclasses:$ARROW_VERSION"
+    static String arrowEffects = "io.arrow-kt:arrow-effects:$ARROW_VERSION"
+    static String arrowEffectsKotlinxCoroutines = "io.arrow-kt:arrow-effects-kotlinx-coroutines:$ARROW_VERSION"
+    static String kotlinxCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$KOTLINX_VERSION"
+    static String kotlinxCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$KOTLINX_VERSION"
 }

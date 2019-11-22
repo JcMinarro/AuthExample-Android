@@ -62,7 +62,7 @@ public class LoginActivity extends BaseInjectionActivity<LoginComponent> impleme
     }
 
     private void onLogin() {
-        presenter.login(username.getText().toString(),
+        presenter.loginFP(username.getText().toString(),
                 password.getText().toString());
     }
 
